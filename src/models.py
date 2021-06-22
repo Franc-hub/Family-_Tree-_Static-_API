@@ -36,7 +36,7 @@ class GrandParents(db.Model):
             "name": self.name,
             "last_name": self.last_name,
             "age": self.age,
-            # "childrens": list(map(lambda x: x.serialize(), self.childrens))
+            "childrens": list(map(lambda x: x.serialize(), self.childrens))
             # do not serialize the password, its a security breach
         }
 
@@ -66,7 +66,7 @@ class Parents(db.Model):
             "name": self.name,
             "last_name": self.last_name,
             "age": self.age,
-            # "parents": list(map(lambda x: x.serialize(), self.parents))
+            "grand_parents": list(map(lambda x: x.serialize(), self.grand_parents))
             # do not serialize the password, its a security breach
         }
 
@@ -87,6 +87,6 @@ class Current_Generation(db.Model):
             "name": self.name,
             "last_name": self.last_name,
             "age": self.age,
-            # "parents": list(map(lambda x: x.serialize(), self.parents))
+            "parents": list(map(lambda x: x.serialize(), self.parents))
             # do not serialize the password, its a security breach
         }
