@@ -25,7 +25,7 @@ class GrandParents(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    parents_id = db.Column(db.Integer, db.ForeignKey('Parents_Relation.id'))
+    # parents_id = db.Column(db.Integer, db.ForeignKey('Parents_Relation.id'))
     childrens = db.relationship('Parents_Relation', backref='grandparents', lazy=True)
     
 
@@ -55,7 +55,8 @@ class Parents(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    # parents = db.relationship('grandparents', backref='parents', lazy=True)
+    grand_parents = db.relationship('Parents_Relation', backref='parents', lazy=True)
+    # current_generation = db.relationship('Parents_Relation', backref='parents', lazy=True)
     
 
     
@@ -77,7 +78,7 @@ class Current_Generation(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    # parents = db.relationship('parents', backref='current_generation', lazy=True)
+    parents = db.relationship('Parents_Relation', backref='current_generation', lazy=True)
 
     
     def serialize(self):
