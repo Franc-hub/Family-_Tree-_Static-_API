@@ -9,7 +9,7 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
 from models import db, User
-#from// models import Person
+#from// models import member
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -38,6 +38,25 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+
+@app.route('/all', methods=['GET'])
+def get_all():
+    members = Member.query.order_by(desc(Member.age)).all()
+    members_dic = []
+    for member in members:
+        members_dic.append(member.serialize()) 
+
+    return jsonify(members_dic),200
+
+
+@app.route('/member/<int:id>', methods=['GET'])
+def show_member(id):
+    member = member.query.filter_by(id = id).first()
+    father = member.query.filter_by(id = member.parent_id).first()
+    children = member.query.filter_by(parent_id = id).first()
+    family = {"members": member.serialize(), "father": father.serialize(), "child": children.serialize()}
+    return jsonify(family),200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

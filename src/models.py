@@ -64,7 +64,7 @@ class Parents(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    grandparent_id = db.Column(db.Integer, db.ForeignKey('grandparent.id'))
+    grandparent_id = db.Column(db.Integer, db.ForeignKey('grandparents.id'))
     grandparent = db.relationship('GrandParents')
     
 
@@ -87,7 +87,7 @@ class Current_Generation(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    parent_id = db.Column(db.Integer, db.ForeignKey('parent.id'))
+    parent_id = db.Column(db.Integer, db.ForeignKey('parents.id'))
     parent = db.relationship('Parents')
 
     
