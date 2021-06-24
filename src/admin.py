@@ -1,6 +1,6 @@
 import os
 from flask_admin import Admin
-from models import db, User,GrandParents,Parents,Current_Generation,Parents_Relation
+from models import db, User,GrandParents,Parents,Current_Generation
 from flask_admin.contrib.sqla import ModelView
 
 def setup_admin(app):
@@ -14,7 +14,7 @@ def setup_admin(app):
     admin.add_view(ModelView(GrandParents, db.session))
     admin.add_view(ModelView(Parents, db.session))
     admin.add_view(ModelView(Current_Generation, db.session))
-    admin.add_view(ModelView(Parents_Relation, db.session))
+   
 
 
     # You can duplicate that line to add mew models
